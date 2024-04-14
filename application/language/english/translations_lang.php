@@ -453,4 +453,7 @@ $lang['webhook_saved'] = 'Webhook saved successfully.';
 $lang['webhook_deleted'] = 'Webhook deleted successfully.';
 $lang['delete_webhook'] = 'Delete Webhook';
 $lang['contact_info'] = 'Contact Info';
+// IMPORTANT: Translation Strings
+$lang['checkin'] = 'Checkin';
+$lang['checkout'] = 'Leave';
 // End

@@ -484,6 +484,29 @@ App.Utils.CalendarDefaultView = (function () {
                                     }),
                                 ],
                             }),
+                            // IMPORTANT: Checkin Checkout Buttons
+                            // $('<button/>', {
+                            //     'class': 'checkin-popover btn btn-primary ' + displayEdit,
+                            //     'html': [
+                            //         $('<i/>', {
+                            //             'class': 'fa-solid fa-arrow-right-to-bracket me-2',
+                            //         }),
+                            //         $('<span/>', {
+                            //             'text': lang('checkin'),
+                            //         }),
+                            //     ],
+                            // }),
+                            $('<button/>', {
+                                'class': 'checkout-popover btn btn-primary ' + displayEdit,
+                                'html': [
+                                    $('<i/>', {
+                                        'class': 'fa-solid fa-arrow-right-from-bracket me-2',
+                                    }),
+                                    $('<span/>', {
+                                        'text': lang('checkout'),
+                                    }),
+                                ],
+                            }),
                         ],
                     }),
                 ],
@@ -583,6 +606,29 @@ App.Utils.CalendarDefaultView = (function () {
                                     }),
                                     $('<span/>', {
                                         'text': lang('edit'),
+                                    }),
+                                ],
+                            }),
+                            // IMPORTANT: Checkin Checkout Buttons
+                            // $('<button/>', {
+                            //     'class': 'checkin-popover btn btn-primary ' + displayEdit,
+                            //     'html': [
+                            //         $('<i/>', {
+                            //             'class': 'fa-solid fa-arrow-right-to-bracket me-2',
+                            //         }),
+                            //         $('<span/>', {
+                            //             'text': lang('checkin'),
+                            //         }),
+                            //     ],
+                            // }),
+                            $('<button/>', {
+                                'class': 'checkout-popover btn btn-primary ' + displayEdit,
+                                'html': [
+                                    $('<i/>', {
+                                        'class': 'fa-solid fa-arrow-right-from-bracket me-2',
+                                    }),
+                                    $('<span/>', {
+                                        'text': lang('checkout'),
                                     }),
                                 ],
                             }),
@@ -751,6 +797,29 @@ App.Utils.CalendarDefaultView = (function () {
                                     }),
                                     $('<span/>', {
                                         'text': lang('edit'),
+                                    }),
+                                ],
+                            }),
+                            // IMPORTANT: Checkin Checkout Buttons
+                            // $('<button/>', {
+                            //     'class': 'checkin-popover btn btn-primary ' + displayEdit,
+                            //     'html': [
+                            //         $('<i/>', {
+                            //             'class': 'fa-solid fa-arrow-right-to-bracket me-2',
+                            //         }),
+                            //         $('<span/>', {
+                            //             'text': lang('checkin'),
+                            //         }),
+                            //     ],
+                            // }),
+                            $('<button/>', {
+                                'class': 'checkout-popover btn btn-primary ' + displayEdit,
+                                'html': [
+                                    $('<i/>', {
+                                        'class': 'fa-solid fa-arrow-right-from-bracket me-2',
+                                    }),
+                                    $('<span/>', {
+                                        'text': lang('checkout'),
                                     }),
                                 ],
                             }),
