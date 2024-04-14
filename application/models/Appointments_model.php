@@ -37,6 +37,8 @@ class Appointments_model extends EA_Model
         'book' => 'book_datetime',
         'start' => 'start_datetime',
         'end' => 'end_datetime',
+        'checkin' => 'checkin_datetime',
+        'checkout' => 'checkout_datetime',
         'location' => 'location',
         'color' => 'color',
         'status' => 'status',
@@ -210,6 +212,8 @@ class Appointments_model extends EA_Model
     protected function insert(array $appointment): int
     {
         $appointment['book_datetime'] = date('Y-m-d H:i:s');
+        $appointment['checkin_datetime'] = date('Y-m-d H:i:s');
+        $appointment['checkout_datetime'] = date('Y-m-d H:i:s');
         $appointment['create_datetime'] = date('Y-m-d H:i:s');
         $appointment['update_datetime'] = date('Y-m-d H:i:s');
         $appointment['hash'] = random_string('alnum', 12);
@@ -534,6 +538,8 @@ class Appointments_model extends EA_Model
             'book' => $appointment['book_datetime'],
             'start' => $appointment['start_datetime'],
             'end' => $appointment['end_datetime'],
+            'checkin' => $appointment['checkin_datetime'],
+            'checkout' => $appointment['checkout_datetime'],
             'hash' => $appointment['hash'],
             'color' => $appointment['color'],
             'status' => $appointment['status'],
@@ -573,6 +579,14 @@ class Appointments_model extends EA_Model
 
         if (array_key_exists('end', $appointment)) {
             $decoded_request['end_datetime'] = $appointment['end'];
+        }
+
+        if (array_key_exists('checkin', $appointment)) {
+            $decoded_request['checkin_datetime'] = $appointment['checkin'];
+        }
+
+        if (array_key_exists('checkout', $appointment)) {
+            $decoded_request['checkout_datetime'] = $appointment['checkout'];
         }
 
         if (array_key_exists('hash', $appointment)) {
