@@ -294,6 +294,36 @@ class Calendar extends EA_Controller
         }
     }
 
+    public function checkin_appointment()
+    {
+        try {
+            $appointment_id = request('appointment_id');
+            $appointment = $this->appointments_model->find($appointment_id);
+            $appointment['checkin_datetime'] = date('Y-m-d H:i:s');
+            $this->appointments_model->save($appointment);
+            json_response([
+                'success' => true,
+            ]);
+        } catch (Throwable $e) {
+            json_exception($e);
+        }
+    }
+
+    public function checkout_appointment()
+    {
+        try {
+            $appointment_id = request('appointment_id');
+            $appointment = $this->appointments_model->find($appointment_id);
+            $appointment['checkout_datetime'] = date('Y-m-d H:i:s');
+            $this->appointments_model->save($appointment);
+            json_response([
+                'success' => true,
+            ]);
+        } catch (Throwable $e) {
+            json_exception($e);
+        }
+    }
+
     private function check_event_permissions(int $provider_id): void
     {
         $user_id = (int) session('user_id');
