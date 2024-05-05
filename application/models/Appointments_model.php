@@ -201,6 +201,27 @@ class Appointments_model extends EA_Model
     }
 
     /**
+     * Get all appointments which are checked in but not checked out yet
+     */
+    public function get_checked_in_customers(): array
+    {
+        $appointments = $this->db
+            ->select('appointments.*')
+            ->from('appointments')
+            ->where('appointments.checkin_datetime IS NOT NULL')
+            ->where('appointments.checkout_datetime IS NULL')
+            ->where('appointments.is_unavailability', false)
+            ->get()
+            ->result_array();
+
+        foreach ($appointments as &$appointment) {
+            $this->cast($appointment);
+        }
+
+        return $appointments;
+    }
+
+    /**
      * Insert a new appointment into the database.
      *
      * @param array $appointment Associative array with the appointment data.
@@ -212,8 +233,6 @@ class Appointments_model extends EA_Model
     protected function insert(array $appointment): int
     {
         $appointment['book_datetime'] = date('Y-m-d H:i:s');
-        $appointment['checkin_datetime'] = date('Y-m-d H:i:s');
-        $appointment['checkout_datetime'] = date('Y-m-d H:i:s');
         $appointment['create_datetime'] = date('Y-m-d H:i:s');
         $appointment['update_datetime'] = date('Y-m-d H:i:s');
         $appointment['hash'] = random_string('alnum', 12);
