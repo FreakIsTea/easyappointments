@@ -28,6 +28,7 @@ class Roles_model extends EA_Model
         'is_admin' => 'boolean',
         'appointments' => 'integer',
         'customers' => 'integer',
+        'emergency_list' => 'integer',
         'services' => 'integer',
         'users' => 'integer',
         'system_settings' => 'integer',
