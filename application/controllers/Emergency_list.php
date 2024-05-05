@@ -7,6 +7,7 @@ class Emergency_list extends EA_Controller
         parent::__construct();
 
         $this->load->model('appointments_model');
+        $this->load->model('customers_model');
         $this->load->model('roles_model');
 
         $this->load->library('accounts');
@@ -57,21 +58,24 @@ class Emergency_list extends EA_Controller
         $this->load->view('pages/emergency_list');
     }
 
-    public function list()
+    public function get_currently_checked_in_appointments()
     {
         try {
             if (cannot('view', PRIV_EMERGENCY_LIST)) {
                 abort(403, 'Forbidden');
             }
 
-            $emergency_id = request('emergency_id');
+            $emergency = $this->appointments_model->get_currently_checked_in_appointments();
 
-            if (!$this->permissions->has_emergency_access(session('user_id'), $emergency_id)) {
-                abort(403, 'Forbidden');
+            foreach ($emergency as &$appointment) {
+                $customerId = $appointment['id_users_customer']; // Replace 'customer_id' with the actual key
+                $customer = $this->customers_model->find($customerId);
+                $customerWithPrefix = [];
+                foreach ($customer as $key => $value) {
+                    $customerWithPrefix['customer_' . $key] = $value;
+                }
+                $appointment = array_merge($appointment, $customerWithPrefix);
             }
-
-            $emergency = $this->emergencies_model->find($emergency_id);
-
             json_response($emergency);
         } catch (Throwable $e) {
             json_exception($e);

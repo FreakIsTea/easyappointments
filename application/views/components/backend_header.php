@@ -39,7 +39,7 @@
             <li class="nav-item <?= $active . $hidden ?>">
                 <a href="<?= site_url('emergency_list') ?>" class="nav-link"
                    data-tippy-content="<?= lang('manage_emergency_list_hint') ?>">
-                    <i class="fas fa-user-friends me-2"></i>
+                    <i class="fa-solid fa-triangle-exclamation"></i>
                     <?= lang('emergency_list') ?>
                 </a>
             </li>

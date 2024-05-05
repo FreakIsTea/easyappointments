@@ -203,7 +203,7 @@ class Appointments_model extends EA_Model
     /**
      * Get all appointments which are checked in but not checked out yet
      */
-    public function get_checked_in_customers(): array
+    public function get_currently_checked_in_appointments(): array
     {
         $appointments = $this->db
             ->select('appointments.*')

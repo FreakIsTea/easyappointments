@@ -83,6 +83,11 @@ class Backend_api extends EA_Controller
         redirect('calendar/checkout_appointment');
     }
 
+    public function ajax_get_currently_checked_in_appointments()
+    {
+        redirect('emergency_list/get_currently_checked_in_appointments');
+    }
+
     /**
      * Disable a providers sync setting.
      */

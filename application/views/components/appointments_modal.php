@@ -180,10 +180,10 @@
                                 </div>
 
                                 <!-- IMPORTANT: Appointment modal -->
-                                <div class="mb-3">
+                                <!-- <div class="mb-3">
                                     <label for="checkin-datetime" class="form-label">checkin_datetime</label>
                                     <input id="checkin-datetime" class="form-control">
-                                </div>
+                                </div> -->
 
 
                                 <div class="mb-3">
