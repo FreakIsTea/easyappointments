@@ -34,6 +34,16 @@
                 </a>
             </li>
 
+            <?php $hidden = can('view', PRIV_EMERGENCY_LIST) ? '' : 'd-none'; ?>
+            <?php $active = $active_menu == PRIV_EMERGENCY_LIST ? 'active' : ''; ?>
+            <li class="nav-item <?= $active . $hidden ?>">
+                <a href="<?= site_url('emergency_list') ?>" class="nav-link"
+                   data-tippy-content="<?= lang('manage_emergency_list_hint') ?>">
+                    <i class="fas fa-user-friends me-2"></i>
+                    <?= lang('emergency_list') ?>
+                </a>
+            </li>
+
             <?php $hidden = can('view', PRIV_CUSTOMERS) ? '' : 'd-none'; ?>
             <?php $active = $active_menu == PRIV_CUSTOMERS ? 'active' : ''; ?>
             <li class="nav-item <?= $active . $hidden ?>">

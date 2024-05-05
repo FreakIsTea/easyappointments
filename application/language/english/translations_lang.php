@@ -456,4 +456,6 @@ $lang['contact_info'] = 'Contact Info';
 // IMPORTANT: Translation Strings
 $lang['checkin'] = 'Checkin';
 $lang['checkout'] = 'Leave';
+$lang['manage_emergency_list_hint'] = "View the emergency list of the company.";
+$lang['emergency_list'] = 'Emergency List';
 // End

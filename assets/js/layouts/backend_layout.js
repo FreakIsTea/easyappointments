@@ -32,6 +32,7 @@ window.App.Layouts.Backend = (function () {
 
     const PRIV_APPOINTMENTS = 'appointments';
     const PRIV_CUSTOMERS = 'customers';
+    const PRIV_EMERGENCY_LIST = 'emergency_list';
     const PRIV_SERVICES = 'services';
     const PRIV_USERS = 'users';
     const PRIV_SYSTEM_SETTINGS = 'system_settings';
@@ -111,6 +112,7 @@ window.App.Layouts.Backend = (function () {
         PRIV_DELETE,
         PRIV_APPOINTMENTS,
         PRIV_CUSTOMERS,
+        PRIV_EMERGENCY_LIST,
         PRIV_SERVICES,
         PRIV_USERS,
         PRIV_SYSTEM_SETTINGS,
