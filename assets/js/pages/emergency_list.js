@@ -2,6 +2,11 @@ App.Pages.EmergencyList = (function () {
     const fetchCurrentlyCheckedInAppointments = () => {
         App.Http.EmergencyList.getCurrentlyCheckedInAppointments()
             .then((response) => {
+                const appointmentCount = response.length;
+                const countElement = document.createElement('p');
+                countElement.innerHTML = `${lang('emergency_list_count')}: <strong>${appointmentCount}</strong>`;
+                document.getElementById('emergency-list-count').appendChild(countElement);
+
                 const properties = new Map()
                     .set('customer_first_name', lang('first_name'))
                     .set('customer_last_name', lang('last_name'))

@@ -4,6 +4,7 @@
 
     <div class="container">
         <h1 class="mt-4 mb-4"><?= lang('emergency_list') ?></h1>
+        <div class="container" id="emergency-list-count"></div>
         <div class="container" id="emergency-list"></div>
     </div>
 
