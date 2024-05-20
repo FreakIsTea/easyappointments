@@ -81,4 +81,33 @@ class Emergency_list extends EA_Controller
             json_exception($e);
         }
     }
+
+    public function get_history_by_date()
+    {
+        try {
+            if (cannot('view', PRIV_EMERGENCY_LIST)) {
+                abort(403, 'Forbidden');
+            }
+
+            $input = json_decode(request('data'), true);
+            $startDate = $input['startDate'];
+            $endDate = $input['endDate'];
+
+            $date = $this->input->get('date');
+            $emergency = $this->appointments_model->get_history_by_date($date);
+
+            foreach ($emergency as &$appointment) {
+                $customerId = $appointment['id_users_customer']; // Replace 'customer_id' with the actual key
+                $customer = $this->customers_model->find($customerId);
+                $customerWithPrefix = [];
+                foreach ($customer as $key => $value) {
+                    $customerWithPrefix['customer_' . $key] = $value;
+                }
+                $appointment = array_merge($appointment, $customerWithPrefix);
+            }
+            json_response($emergency);
+        } catch (Throwable $e) {
+            json_exception($e);
+        }
+    }
 }

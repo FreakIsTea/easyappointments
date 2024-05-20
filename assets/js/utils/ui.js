@@ -55,7 +55,7 @@ window.App.Utils.UI = (function () {
      * @return Object
      */
     function getFlatpickrLocale() {
-        const firstWeekDay = vars('first_weekday');
+        const firstWeekDay = vars('first_weekday') ?? 'mon';
 
         const firstWeekDayNumber = App.Utils.Date.getWeekdayId(firstWeekDay);
 

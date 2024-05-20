@@ -459,4 +459,6 @@ $lang['checkout'] = 'Leave';
 $lang['manage_emergency_list_hint'] = "View the emergency list of the company.";
 $lang['emergency_list'] = 'Emergency List';
 $lang['emergency_list_count'] = "Total Customers";
+$lang['export_pdf'] = "Export PDF";
+$lang['export_history'] = "Export History";
 // End
