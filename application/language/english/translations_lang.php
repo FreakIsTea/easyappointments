@@ -461,4 +461,6 @@ $lang['emergency_list'] = 'Emergency List';
 $lang['emergency_list_count'] = "Total Customers";
 $lang['export_pdf'] = "Export PDF";
 $lang['export_history'] = "Export History";
+$lang['date_range'] = "Date Range";
+$lang['no_results'] = "No results found";
 // End

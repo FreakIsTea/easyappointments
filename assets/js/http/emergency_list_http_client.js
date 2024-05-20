@@ -9,16 +9,13 @@ App.Http.EmergencyList = (function () {
         return $.post(url, data);
     }
 
-    function getHistoryByDate() {
+    function getHistoryByDate(startDate, endDate) {
         const url = App.Utils.Url.siteUrl('emergency_list/get_history_by_date');
-        const date = new Date();
 
         const data = {
             csrf_token: vars('csrf_token'),
-            data: {
-                start_date: startDate.toISOString(),
-                end_date: endDate.toISOString(),
-            },
+            start_date: moment(startDate).format('YYYY-MM-DD HH:mm:ss'),
+            end_date: moment(endDate).format('YYYY-MM-DD HH:mm:ss'),
         };
 
         return $.post(url, data);

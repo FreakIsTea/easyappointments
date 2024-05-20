@@ -89,14 +89,23 @@ class Emergency_list extends EA_Controller
                 abort(403, 'Forbidden');
             }
 
-            $input = json_decode(request('data'), true);
-            $startDate = $input['startDate'];
-            $endDate = $input['endDate'];
+            $start_date = $this->input->post('start_date');
+            $end_date = $this->input->post('end_date');
 
-            $date = $this->input->get('date');
-            $emergency = $this->appointments_model->get_history_by_date($date);
+            if (empty($start_date) || empty($end_date)) {
+                throw new Exception('Start date and end date are required');
+            }
 
-            foreach ($emergency as &$appointment) {
+            $appointments = $this->appointments_model->get([
+                'checkin_datetime >=' => $start_date,
+                'checkin_datetime <=' => $end_date,
+            ]);
+
+            $filtered_appointments = array_filter($appointments, function ($appointment) use ($end_date) {
+                return $appointment['checkout_datetime'] <= $end_date || $appointment['checkout_datetime'] === null;
+            });
+
+            foreach ($filtered_appointments as &$appointment) {
                 $customerId = $appointment['id_users_customer']; // Replace 'customer_id' with the actual key
                 $customer = $this->customers_model->find($customerId);
                 $customerWithPrefix = [];
@@ -105,7 +114,7 @@ class Emergency_list extends EA_Controller
                 }
                 $appointment = array_merge($appointment, $customerWithPrefix);
             }
-            json_response($emergency);
+            json_response($filtered_appointments);
         } catch (Throwable $e) {
             json_exception($e);
         }

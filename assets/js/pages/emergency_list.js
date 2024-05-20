@@ -32,8 +32,6 @@ App.Pages.EmergencyList = (function () {
 
                 // Create table body
                 response.forEach((appointment) => {
-                    console.log('Appointment:', appointment);
-
                     const row = table.insertRow();
                     for (const [key, _] of properties.entries()) {
                         const cell = row.insertCell();
@@ -44,7 +42,7 @@ App.Pages.EmergencyList = (function () {
                 document.getElementById('emergency-list').appendChild(table);
             })
             .catch((error) => {
-                console.log('Error fetching currently checked in appointments:', error);
+                console.error('Error fetching currently checked in appointments:', error);
             });
     };
 
@@ -83,15 +81,6 @@ App.Pages.EmergencyList = (function () {
     };
 
     const exportEmergencyList = () => {
-        // const {jsPDF} = jspdf;
-        // const pdf = new jsPDF();
-        // const source = $('#emergency-list')[0];
-        // pdf.html(source, {
-        //     callback: () => {
-        //         const dateStamp = moment().format('YYYY-MM-DD');
-        //         pdf.save(`emergency-list-${dateStamp}.pdf`);
-        //     },
-        // });
         html2PDF(document.getElementById('emergency-list'), {
             jsPDF: {
                 format: 'a4',
@@ -106,6 +95,66 @@ App.Pages.EmergencyList = (function () {
         });
     };
 
+    const exportHistory = (response) => {
+        const container = document.getElementById('history-export-container');
+        const p = document.createElement('p');
+        const startDate = App.Utils.UI.getDateTimePickerValue($('#start-datetime'));
+        const endDate = App.Utils.UI.getDateTimePickerValue($('#end-datetime'));
+        const dateRangeString = `${moment(startDate).format('YYYY-MM-DD HH:mm:ss')} - ${moment(endDate).format(
+            'YYYY-MM-DD HH:mm:ss',
+        )}`;
+
+        p.innerHTML = `<strong>${lang('date_range')}:</strong> ${dateRangeString}`;
+        container.appendChild(p);
+
+        const table = document.createElement('table');
+        table.className = 'table';
+        const properties = new Map()
+            .set('customer_first_name', lang('first_name'))
+            .set('customer_last_name', lang('last_name'))
+            .set('customer_phone_number', lang('phone'))
+            .set('customer_mobile_number', lang('mobile'))
+            .set('checkin_datetime', lang('checkin'))
+            .set('checkout_datetime', lang('checkout'));
+
+        // Create table header
+        const header = table.createTHead();
+        const headerRow = header.insertRow();
+        for (const [_, value] of properties.entries()) {
+            const th = document.createElement('th');
+            th.textContent = value;
+            headerRow.appendChild(th);
+        }
+
+        // Create table body
+        response.forEach((appointment) => {
+            const row = table.insertRow();
+            for (const [key, _] of properties.entries()) {
+                const cell = row.insertCell();
+                cell.textContent = appointment[key];
+            }
+        });
+
+        if (response.length === 0) container.appendChild((document.createElement('p').innerHTML = lang('no_results')));
+        else container.appendChild(table);
+
+        const dateTimeStamp = moment().format('YYYY-MM-DD');
+        html2PDF(container, {
+            jsPDF: {
+                format: 'a4',
+            },
+            margin: {
+                top: 20,
+                right: 20,
+                bottom: 20,
+                left: 20,
+            },
+            output: `report-${dateTimeStamp}.pdf`,
+        });
+
+        container.innerHTML = '';
+    };
+
     document.getElementById('export-history').addEventListener('click', () => {
         modal = new bootstrap.Modal(document.getElementById('export-history-modal'));
         modal.show();
@@ -116,9 +165,17 @@ App.Pages.EmergencyList = (function () {
     });
 
     document.getElementById('export-history-button').addEventListener('click', () => {
-        //Export logic
-        console.log('EXPORT');
-        modal.hide();
+        const startDate = App.Utils.UI.getDateTimePickerValue($('#start-datetime'));
+        const endDate = App.Utils.UI.getDateTimePickerValue($('#end-datetime'));
+        App.Http.EmergencyList.getHistoryByDate(startDate, endDate)
+            .then((response) => {
+                if (!Array.isArray(response)) throw new Error('Response is not an array');
+                exportHistory(response);
+                modal.hide();
+            })
+            .catch((error) => {
+                console.error('Error fetching history:', error);
+            });
     });
 
     document.getElementById('export-pdf').addEventListener('click', () => {

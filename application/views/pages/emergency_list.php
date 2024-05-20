@@ -3,10 +3,9 @@
 <?php section('content'); ?>
 
     <div class="container">
-        <h1 class="mt-4 mb-4"><?= lang('emergency_list') ?></h1>¨
+        <h1 class="mt-4 mb-4"><?= lang('emergency_list') ?></h1>
         <div class="d-flex flex-row align-items-center" style="margin-bottom: 15px">
-            <div class="container" id="emergency-list-count"></div>
-            
+            <div class="container" id="emergency-list-count"></div>            
             <button class="btn btn-primary" id="export-pdf" style="width: 200px; margin-right: 10px"><?= lang(
                 'export_pdf',
             ) ?></button>
@@ -41,9 +40,10 @@
                     </div>
                 </div>
             </div>
+         </div>
+
+         <div id="history-export-container"></div>
     </div>
-
-
 
 <?php end_section('content'); ?>
 
