@@ -75,6 +75,28 @@ App.Http.Calendar = (function () {
         return $.post(url, data);
     }
 
+    function checkinAppointment(appointmentId) {
+        const url = App.Utils.Url.siteUrl('calendar/checkin_appointment');
+
+        const data = {
+            csrf_token: vars('csrf_token'),
+            appointment_id: appointmentId,
+        };
+
+        return $.post(url, data);
+    }
+
+    function checkoutAppointment(appointmentId) {
+        const url = App.Utils.Url.siteUrl('calendar/checkout_appointment');
+
+        const data = {
+            csrf_token: vars('csrf_token'),
+            appointment_id: appointmentId,
+        };
+
+        return $.post(url, data);
+    }
+
     /**
      * Save unavailability period to database.
      *
@@ -236,6 +258,8 @@ App.Http.Calendar = (function () {
     return {
         saveAppointment,
         deleteAppointment,
+        checkinAppointment,
+        checkoutAppointment,
         saveUnavailability,
         deleteUnavailability,
         saveWorkingPlanException,

@@ -179,6 +179,13 @@
                                     </div>
                                 </div>
 
+                                <!-- IMPORTANT: Appointment modal -->
+                                <!-- <div class="mb-3">
+                                    <label for="checkin-datetime" class="form-label">checkin_datetime</label>
+                                    <input id="checkin-datetime" class="form-control">
+                                </div> -->
+
+
                                 <div class="mb-3">
                                     <label for="appointment-notes" class="form-label"><?= lang('notes') ?></label>
                                     <textarea id="appointment-notes" class="form-control" rows="3"></textarea>

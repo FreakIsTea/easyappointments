@@ -37,6 +37,8 @@ class Appointments_model extends EA_Model
         'book' => 'book_datetime',
         'start' => 'start_datetime',
         'end' => 'end_datetime',
+        'checkin' => 'checkin_datetime',
+        'checkout' => 'checkout_datetime',
         'location' => 'location',
         'color' => 'color',
         'status' => 'status',
@@ -189,6 +191,27 @@ class Appointments_model extends EA_Model
 
         $appointments = $this->db
             ->get_where('appointments', ['is_unavailability' => false], $limit, $offset)
+            ->result_array();
+
+        foreach ($appointments as &$appointment) {
+            $this->cast($appointment);
+        }
+
+        return $appointments;
+    }
+
+    /**
+     * Get all appointments which are checked in but not checked out yet
+     */
+    public function get_currently_checked_in_appointments(): array
+    {
+        $appointments = $this->db
+            ->select('appointments.*')
+            ->from('appointments')
+            ->where('appointments.checkin_datetime IS NOT NULL')
+            ->where('appointments.checkout_datetime IS NULL')
+            ->where('appointments.is_unavailability', false)
+            ->get()
             ->result_array();
 
         foreach ($appointments as &$appointment) {
@@ -534,6 +557,8 @@ class Appointments_model extends EA_Model
             'book' => $appointment['book_datetime'],
             'start' => $appointment['start_datetime'],
             'end' => $appointment['end_datetime'],
+            'checkin' => $appointment['checkin_datetime'],
+            'checkout' => $appointment['checkout_datetime'],
             'hash' => $appointment['hash'],
             'color' => $appointment['color'],
             'status' => $appointment['status'],
@@ -573,6 +598,14 @@ class Appointments_model extends EA_Model
 
         if (array_key_exists('end', $appointment)) {
             $decoded_request['end_datetime'] = $appointment['end'];
+        }
+
+        if (array_key_exists('checkin', $appointment)) {
+            $decoded_request['checkin_datetime'] = $appointment['checkin'];
+        }
+
+        if (array_key_exists('checkout', $appointment)) {
+            $decoded_request['checkout_datetime'] = $appointment['checkout'];
         }
 
         if (array_key_exists('hash', $appointment)) {

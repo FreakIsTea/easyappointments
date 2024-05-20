@@ -72,6 +72,30 @@ App.Utils.CalendarDefaultView = (function () {
             }
         });
 
+        $calendarPage.on('click', '.checkin-popover', (event) => {
+            if ($popoverTarget) {
+                $popoverTarget.popover('dispose');
+            }
+
+            const appointment = lastFocusedEventData.extendedProps.data;
+
+            App.Http.Calendar.checkinAppointment(appointment.id).done(() => {
+                $reloadAppointments.trigger('click');
+            });
+        });
+
+        $calendarPage.on('click', '.checkout-popover', (event) => {
+            if ($popoverTarget) {
+                $popoverTarget.popover('dispose');
+            }
+
+            const appointment = lastFocusedEventData.extendedProps.data;
+
+            App.Http.Calendar.checkoutAppointment(appointment.id).done(() => {
+                $reloadAppointments.trigger('click');
+            });
+        });
+
         /**
          * Event: Popover Edit Button "Click"
          *
@@ -381,7 +405,7 @@ App.Utils.CalendarDefaultView = (function () {
      */
     function onEventClick(info) {
         const $target = $(info.el);
-
+        console.log('info', info.event.extendedProps.data);
         if ($popoverTarget) {
             $popoverTarget.popover('dispose');
         }
@@ -389,6 +413,8 @@ App.Utils.CalendarDefaultView = (function () {
         let $html;
         let displayEdit;
         let displayDelete;
+        let displayCheckin;
+        let displayCheckout;
 
         // Depending on where the user clicked the event (title or empty space) we
         // need to use different selectors to reach the parent element.
@@ -593,6 +619,9 @@ App.Utils.CalendarDefaultView = (function () {
         } else {
             displayEdit = vars('privileges').appointments.edit === true ? '' : 'd-none';
             displayDelete = vars('privileges').appointments.delete === true ? 'me-2' : 'd-none';
+            displayCheckin = info.event.extendedProps.data.checkin_datetime === null;
+            displayCheckout = !displayCheckin && info.event.extendedProps.data.checkout_datetime === null;
+            console.log('checkin', displayCheckin, 'checkout', displayCheckout);
 
             const customerInfo = [];
 
@@ -751,6 +780,29 @@ App.Utils.CalendarDefaultView = (function () {
                                     }),
                                     $('<span/>', {
                                         'text': lang('edit'),
+                                    }),
+                                ],
+                            }),
+                            // IMPORTANT: Checkin Checkout Buttons
+                            $('<button/>', {
+                                'class': 'checkin-popover btn btn-primary ' + (displayCheckin ? '' : 'd-none'),
+                                'html': [
+                                    $('<i/>', {
+                                        'class': 'fa-solid fa-arrow-right-to-bracket me-2',
+                                    }),
+                                    $('<span/>', {
+                                        'text': lang('checkin'),
+                                    }),
+                                ],
+                            }),
+                            $('<button/>', {
+                                'class': 'checkout-popover btn btn-primary ' + (displayCheckout ? '' : 'd-none'),
+                                'html': [
+                                    $('<i/>', {
+                                        'class': 'fa-solid fa-arrow-right-from-bracket me-2',
+                                    }),
+                                    $('<span/>', {
+                                        'text': lang('checkout'),
                                     }),
                                 ],
                             }),

@@ -453,4 +453,14 @@ $lang['webhook_saved'] = 'Webhook saved successfully.';
 $lang['webhook_deleted'] = 'Webhook deleted successfully.';
 $lang['delete_webhook'] = 'Delete Webhook';
 $lang['contact_info'] = 'Contact Info';
+// IMPORTANT: Translation Strings
+$lang['checkin'] = 'Checkin';
+$lang['checkout'] = 'Leave';
+$lang['manage_emergency_list_hint'] = "View the emergency list of the company.";
+$lang['emergency_list'] = 'Emergency List';
+$lang['emergency_list_count'] = "Total Customers";
+$lang['export_pdf'] = "Export PDF";
+$lang['export_history'] = "Export History";
+$lang['date_range'] = "Date Range";
+$lang['no_results'] = "No results found";
 // End
