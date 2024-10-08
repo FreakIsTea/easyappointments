@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- * Easy!Appointments - Online Appointment Scheduler
+ * Foppen Visitors - Online Appointment Scheduler
  *
  * @package     EasyAppointments
  * @author      A.Tselegidis <alextselegidis@gmail.com>
@@ -36,7 +36,7 @@ App.Utils.CalendarGoogleSync = (function () {
 
                 const redirectUrl = App.Utils.Url.siteUrl('google/oauth_callback');
 
-                const windowHandle = window.open(authUrl, 'Authorize Easy!Appointments', 'width=800, height=600');
+                const windowHandle = window.open(authUrl, 'Authorize Foppen Visitors', 'width=800, height=600');
 
                 const authInterval = window.setInterval(() => {
                     // When the browser redirects to the google user consent page the "window.document" constiable

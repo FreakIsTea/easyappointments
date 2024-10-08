@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- * Easy!Appointments - Online Appointment Scheduler
+ * Foppen Visitors - Online Appointment Scheduler
  *
  * @package     EasyAppointments
  * @author      A.Tselegidis <alextselegidis@gmail.com>
@@ -39,7 +39,7 @@ App.Pages.Installation = (function () {
     });
 
     /**
-     * Event: Install Easy!Appointments Button "Click"
+     * Event: Install Foppen Visitors Button "Click"
      */
     $install.on('click', () => {
         if (!validate()) {
@@ -61,7 +61,7 @@ App.Pages.Installation = (function () {
             dataType: 'json',
         }).done(() => {
             $alert
-                .text('Easy!Appointments has been successfully installed!')
+                .text('Foppen Visitors has been successfully installed!')
                 .addClass('alert-success')
                 .prop('hidden', false);
 
