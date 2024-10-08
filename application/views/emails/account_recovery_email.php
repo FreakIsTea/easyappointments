@@ -9,7 +9,7 @@
 ?>
 <html lang="en">
 <head>
-    <title><?= $subject ?> | Easy!Appointments</title>
+    <title><?= $subject ?> | Foppen Visitors</title>
 </head>
 <body style="font: 13px arial, helvetica, tahoma;">
 

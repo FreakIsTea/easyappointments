@@ -17,7 +17,7 @@
 <html lang="en">
 <head>
     <title>
-        <?= lang('appointment_details_title') ?> | Easy!Appointments
+        <?= lang('appointment_details_title') ?> | Foppen Visitors
     </title>
 </head>
 <body style="font: 13px arial, helvetica, tahoma;">

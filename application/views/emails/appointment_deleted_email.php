@@ -14,7 +14,7 @@
 
 <html lang="en">
 <head>
-    <title><?= lang('appointment_cancelled_title') ?> | Easy!Appointments</title>
+    <title><?= lang('appointment_cancelled_title') ?> | Foppen Visitors</title>
 </head>
 <body style="font: 13px arial, helvetica, tahoma;">
 
